@@ -30,15 +30,13 @@ const txtBanner = document.querySelector('#banner p');
 // Sélecteur du conteneur des "pastilles" (dot) de navigation de la bannière
 const dotContainerBanner = document.querySelector('.dots');
 
-// Déclaration de la variable "tabActiv"
-let tabActiv = 0;
 
 
 // Variable qui permet de changer les éléments HTML du carrousel (image et tagline)
 const updateSlider = () => {
 
 	//on met à jour la source (src) d'une image (imgBanner) pour qu'elle affiche une nouvelle image.
-	//Le chemin de cette image est construit  en fonction du nom de l'image stocké dans un objet au sein du tableau 'slides' à  'tabActiv'.
+	//Le chemin de cette image est construit  en fonction du nom de l'image actuellement stocké dans un objet dans tableau 'slides' à  'tabActiv'.
 	imgBanner.src = `./assets/images/slideshow/${slides[tabActiv].image}`;
 	
 	//on change le texte affiché dans l'élément HTML txtBanner,
@@ -46,8 +44,11 @@ const updateSlider = () => {
 	txtBanner.innerHTML = slides[tabActiv].tagLine;
 };
 
+// Déclaration de la variable "tabActiv"
+let tabActiv = 0;
+
 // Ecouteur evènement au clique sur la flèche gauche
-arrowleft.addEventListener(`click`, function () {
+arrowleft.addEventListener(`click`, () => {
 
 	// lorsque l'on clique l'index est décrémenter (--)
 	tabActiv--;
@@ -58,7 +59,7 @@ arrowleft.addEventListener(`click`, function () {
 		// il est défini sur le dernier index de slides
 		tabActiv = slides.length - 1;
 		// .length définit (ou renvoie) le nombre d'éléments dans le tableau "slides"
-		// -1 = l'index revient de 1 en arrière
+		// -1 = tabActiv revient de 1 en arrière
 
 	}
 	updateSlider();
@@ -67,15 +68,15 @@ arrowleft.addEventListener(`click`, function () {
 
 
 // Ecouteur évènement au clique sur la flèche droite
-arrowright.addEventListener(`click`, function () {
+arrowright.addEventListener(`click`, () => {
 
-	// Lorsque l'on clique, l'index est incrémenté (++)
+	// Lorsque l'on clique, tabActiv est incrémenté (++)
 	tabActiv++;
 
-	// Si l'index est supérieur ou égal au nombre total d'éléments de slides
+	// Si tabActiv est supérieur ou égal au nombre total d'éléments de slides
 	if (tabActiv >= slides.length) {
 
-		// l'index reviens à 0
+		// tabActiv reviens à 0
 		tabActiv = 0;
 	}
 	updateSlider();
@@ -99,7 +100,7 @@ window.addEventListener('load', () => {
 		// on crée la classe 'dot' dans le html
 		dot.classList.add('dot')
 
-		//on ajouté la classe 'dot' qu'on a crée avant a dotContainerBanner
+		//on ajouté la variable 'dot' qu'on a crée avant a dotContainerBanner
 		dotContainerBanner.appendChild(dot)
 	}
 
